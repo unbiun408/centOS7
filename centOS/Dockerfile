@@ -1,5 +1,5 @@
-# 使用CentOS作为基础镜像
-FROM centos:7
+# 使用CentOS 8作为基础镜像
+FROM centos:8
 
 # 设置环境变量
 ENV MYSQL_ROOT_PASSWORD=root
@@ -10,10 +10,10 @@ ENV JAVA_HOME=/usr/java/latest
 ENV PATH=$JAVA_HOME/bin:$PATH
 
 # 安装必要的软件
-RUN yum update -y && \
-    yum install -y epel-release && \
-    yum install -y httpd mysql-server java-1.8.0-openjdk-devel nginx && \
-    yum clean all
+RUN dnf -y update && \
+    dnf install -y epel-release && \
+    dnf install -y httpd mysql-server java-1.8.0-openjdk-devel nginx && \
+    dnf clean all
 
 # 启动MySQL服务
 RUN systemctl enable mysqld
